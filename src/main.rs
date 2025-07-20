@@ -9,7 +9,7 @@ use rfd::FileDialog; // Import the FileDialog crate
 enum Theme {
     GitHubLight,
     GitHubDark,
-    GitHubAuto,
+    GitHubAuto, // This would typically involve media queries for light/dark preference
 }
 
 impl Theme {
@@ -224,8 +224,9 @@ impl App {
 
 fn main() -> eframe::Result<()> {
     let options = eframe::NativeOptions {
-        initial_window_size: Some(egui::vec2(500.0, 300.0)), // Set a compact initial window size
-        min_window_size: Some(egui::vec2(400.0, 250.0)), // Optional: Set a minimum size
+        viewport: egui::ViewportBuilder::default()
+            .with_inner_size([500.0, 300.0]) // Set initial window size
+            .with_min_inner_size([400.0, 250.0]), // Set minimum window size
         ..Default::default()
     };
     eframe::run_native(
